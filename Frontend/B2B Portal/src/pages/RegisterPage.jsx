@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button, Image, InputGroup } from 'react-bootstrap';
-import { FaEye, FaEyeSlash, FaCaretDown } from 'react-icons/fa';
+import { Container, Row, Col, Form, Button, InputGroup } from 'react-bootstrap';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from 'react-icons/md';
-
-
-import bannerImage from '../assets/B2BPortalBanner.png'
+import bannerImage from '../assets/B2BPortalBanner.png';
+import { Link } from "react-router-dom";
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -79,8 +78,9 @@ export default function RegisterPage() {
                   <Form.Control
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Enter password"
+                    style={{ borderRightColor: 'white'}}
                   />
-                  <InputGroup.Text onClick={togglePasswordVisibility}>
+                  <InputGroup.Text onClick={togglePasswordVisibility} style={{backgroundColor:'white'}}>
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </InputGroup.Text>
                 </InputGroup>
@@ -94,7 +94,9 @@ export default function RegisterPage() {
               <br />
               <br />
               <Button type="submit" style={{ width: '100%', backgroundColor: 'rgba(18,183,106,255)', borderColor: 'rgba(18,183,106,255)', marginBottom: '15px', fontWeight: 'bold' }}>Continue</Button>
-              <Button type="button" style={{ width: '100%', color: 'rgba(18,183,106,255)', backgroundColor: 'white', borderColor: 'rgba(18,183,106,255)', fontWeight: 'bold', marginBottom: '25px' }}>Back</Button>
+              <Link to={'/login'}>
+                <Button type="button" style={{ width: '100%', color: 'rgba(18,183,106,255)', backgroundColor: 'white', borderColor: 'rgba(18,183,106,255)', fontWeight: 'bold', marginBottom: '25px' }}>Back</Button>
+              </Link>
             </Form>
           </div>
         </Col>

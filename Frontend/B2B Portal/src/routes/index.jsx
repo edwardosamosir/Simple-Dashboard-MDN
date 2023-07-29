@@ -2,6 +2,7 @@ import React from 'react'
 import {createBrowserRouter, redirect } from 'react-router-dom'
 import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
+import ForgotPasswordPage from '../pages/ForgotPasswordPage'
 import HomePage from '../pages/HomePage'
 import SuppliersPage from '../pages/SuppliersPage'
 import CustomersPage from '../pages/CustomersPage'
@@ -51,6 +52,15 @@ const router = createBrowserRouter([
             return null
         },
         element : <RegisterPage />
+    },
+    {
+        path : "/forgot-password",
+        loader : () => {
+            const token = localStorage.getItem('access_token')
+            if(token) throw redirect ('/home')
+            return null
+        },
+        element : <ForgotPasswordPage />
     }
 ])
 

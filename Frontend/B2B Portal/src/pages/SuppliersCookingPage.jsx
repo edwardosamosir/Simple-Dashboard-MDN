@@ -1,4 +1,4 @@
-export default function SuppliersPage() {
+export default function SuppliersCookingPage() {
 
 
     return (

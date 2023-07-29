@@ -88,7 +88,7 @@ export default function RegisterPage() {
               <br />
               <Form.Group controlId="formBasicConfirmPassword">
                 <Form.Label style={{ fontWeight: 'bold' }}>Confirm Password</Form.Label>
-                <Form.Control type="password" placeholder="Enter password" />
+                <Form.Control type="password" placeholder="Re-enter password" />
               </Form.Group>
               <br />
               <br />

@@ -3,19 +3,25 @@ import {createBrowserRouter, redirect } from 'react-router-dom'
 import LoginPage from '../pages/LoginPage'
 import RegisterPage from '../pages/RegisterPage'
 import ForgotPasswordPage from '../pages/ForgotPasswordPage'
-import HomePage from '../pages/HomePage'
-import SuppliersPage from '../pages/SuppliersPage'
-import CustomersPage from '../pages/CustomersPage'
 import Layout from '../pages/Layout'
+import HomePage from '../pages/HomePage'
+import SuppliersCookingPage from '../pages/SuppliersCookingPage'
+import SuppliersCoolingPage from '../pages/SuppliersCooklingPage'
+import SuppliersCleaningPage from '../pages/SuppliersCleaningPage'
+import ConfigAdminsPage from '../pages/ConfigAdmins'
+import ConfigUsersPage from '../pages/ConfigUsers'
+import CustomersCookingPage from '../pages/CustomersCookingPage'
+import CustomersCoolingPage from '../pages/CustomersCoolingPage'
+import CustomersCleaningPage from '../pages/CustomersCleaningPage'
 
 const router = createBrowserRouter([
     {
         element : <Layout />,
-        loader : () => {
-            const token = localStorage.getItem('access_token')
-            if(!token) throw redirect ('/login')
-            return null
-        },
+        // loader : () => {
+        //     const token = localStorage.getItem('access_token')
+        //     if(!token) throw redirect ('/login')
+        //     return null
+        // },
         children : [
             {
                 path : "/",
@@ -26,12 +32,36 @@ const router = createBrowserRouter([
                 element : <HomePage/>
             },
             {
-                path : "/suppliers",
-                element : <SuppliersPage/>
+                path : "/suppliers/cooking",
+                element : <SuppliersCookingPage/>
             },
             {
-                path : "/customers",
-                element : <CustomersPage/>
+                path : "/suppliers/cooling",
+                element : <SuppliersCoolingPage/>
+            },
+            {
+                path : "/suppliers/cleaning",
+                element : <SuppliersCleaningPage/>
+            },
+            {
+                path : "/customers/cooking",
+                element : <CustomersCookingPage/>
+            },
+            {
+                path : "/customers/cooling",
+                element : <CustomersCoolingPage/>
+            },
+            {
+                path : "/customers/cleaning",
+                element : <CustomersCleaningPage/>
+            },
+            {
+                path : "/config/administrators",
+                element : <ConfigAdminsPage/>
+            },
+            {
+                path : "/config/users",
+                element : <ConfigUsersPage />
             }
         ]
     },

@@ -1,4 +1,4 @@
-export default function CustomersPage() {
+export default function CustomersCoolingPage() {
 
 
     return (

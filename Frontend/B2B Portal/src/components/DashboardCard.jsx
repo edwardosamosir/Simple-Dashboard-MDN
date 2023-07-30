@@ -1,20 +1,19 @@
 import React from "react";
-import { Card, Container, Row, Col, Button } from "react-bootstrap";
+import { Card, Container, Row, Col } from "react-bootstrap";
 import EntityCard from "../components/EntityCard";
-import { FaFileImport } from 'react-icons/fa';
 import { PiArrowSquareUp } from 'react-icons/pi';
 import CustomButton from "./CustomButton";
 
 export default function DashboardCard() {
     return (
-        <Container style={{ maxWidth: '1800px', margin: '30px' }}>
+        <Container className="mt-1 mb-1" fluid style={{ padding: '10px 30px' }}>
             <Row>
                 <Col>
                     <Card>
                         <Card.Header style={{ backgroundColor: 'white', margin: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                             <div style={{ marginLeft: '-15px' }}>
                                 <Card.Title>Dashboard</Card.Title>
-                                <Card.Text style={{ color: 'gray' }}>This companies have a dashboard</Card.Text>
+                                <Card.Text style={{ color: 'gray' }}>These companies have a dashboard</Card.Text>
                             </div>
                             <button
                                 style={{
@@ -39,7 +38,7 @@ export default function DashboardCard() {
                             <CustomButton buttonText="3 Months" />
                             <CustomButton buttonText="2 Months" />
                         </Card.Body>
-                        <Card.Body className="mb-4" >
+                        <Card.Body className="mb-3" >
                             <Row>
                                 <Col md={3}>
                                     <EntityCard />

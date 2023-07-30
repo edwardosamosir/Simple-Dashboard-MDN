@@ -1,10 +1,11 @@
 import { Col, Container, Form, Row, InputGroup, Button } from "react-bootstrap";
 import { FaSearch, FaBell, FaStore } from 'react-icons/fa';
+import { PiCreditCardFill } from 'react-icons/pi';
 import profilePic from '../assets/dummyProfilePic.jpg';
 
 export default function Header() {
     return (
-        <Container fluid>
+        <div fluid >
             <Row style={{ backgroundColor: 'white', alignItems: 'center' }}>
                 <Col sm={3} className="mt-3 mb-3">
                     <Form className="d-flex">
@@ -17,6 +18,7 @@ export default function Header() {
                                 placeholder="Search"
                                 className="me-2"
                                 aria-label="Search"
+                                size="sm"
                                 style={{ 
                                     backgroundColor: 'rgba(236,236,236,255)', 
                                     borderLeftColor: 'rgba(236,236,236,255)'
@@ -46,7 +48,7 @@ export default function Header() {
                             justifyContent: 'center',
                             marginLeft: '20px',
                         }}>
-                            <FaBell style={{ fontSize: '20px', color: 'gray' }} />
+                            <FaBell style={{ fontSize: '25px', color: 'gray' }} />
                         </div>
                         <div style={{
                             width: '50px',
@@ -59,11 +61,11 @@ export default function Header() {
                             marginLeft: '20px',
                             marginRight: '20px'
                         }}>
-                            <FaStore style={{ fontSize: '20px', color: 'gray' }} />
+                            <PiCreditCardFill style={{ fontSize: '30px', color: 'gray' }} />
                         </div>
                     </div>
                 </Col>
             </Row>
-        </Container>
+        </div>
     );
 }

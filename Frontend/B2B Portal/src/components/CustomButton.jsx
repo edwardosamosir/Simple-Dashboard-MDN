@@ -6,7 +6,9 @@ export default function CustomButton ({ buttonText }){
     color:'black', 
     backgroundColor: 'white', 
     borderColor: 'rgba(210,210,210,255)',
-    margin: '0px 15px 0px 5px'
+    margin: '0px 15px 0px 5px',
+    padding: ' 5px 19px'
+
   };
 
   return (

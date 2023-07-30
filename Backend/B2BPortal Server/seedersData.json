@@ -1,0 +1,52 @@
+{
+    "users": [
+      {
+        "name": "Edwardo Samosir",
+        "email": "edwardosamosir@gmail.com",
+        "phone": "+6281200009999",
+        "password": "L154inb4b1$$",
+        "type": 1,
+        "avatar": "www.dummypic.com/edwardosamosir"
+      },
+      {
+        "name": "Admin",
+        "email": "admin@admin.com",
+        "phone": "+62812777878",
+        "password": "L154inb4b1$$",
+        "type": 1,
+        "avatar": "www.dummypic.com/admin"
+      },
+      {
+        "name": "Robert Downey",
+        "email": "robertdowney@gmail.com",
+        "phone": "+628127978950",
+        "password": "robertdowney123",
+        "type": 1,
+        "avatar": "www.dummypic.com/robertdowney"
+      },
+      {
+        "name": "Chris Evans",
+        "email": "chrisevans@gmail.com",
+        "phone": "+6281289565465",
+        "password": "chrisevans123",
+        "type": 2,
+        "avatar": "www.dummypic.com/chrisevans"
+      },
+      {
+        "name": "Natasha Romanof",
+        "email": "natasharomanof@gmail.com",
+        "phone": "+6281231120780",
+        "password": "natasharomanof123",
+        "type": 1,
+        "avatar": "www.dummypic.com/natasharomanof"
+      },
+      {
+        "name": "Mark Ruffalo",
+        "email": "markrufallo@gmail.com",
+        "phone": "+6281279453950",
+        "password": "markrufallo123",
+        "type": 2,
+        "avatar": "www.dummypic.com/markrufallo"
+      }
+    ]
+}

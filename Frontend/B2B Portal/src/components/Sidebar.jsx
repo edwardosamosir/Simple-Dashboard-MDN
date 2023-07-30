@@ -21,7 +21,7 @@ export default function Sidebar() {
 
   return (
     <>
-      <div style={{ width: sidebarOpen ? '17%' : '4%', backgroundColor: 'rgba(10,25,41,255)', overflow: 'auto' }}>
+      <div style={{ width: sidebarOpen ? '17%' : '4%', height:'100vh', backgroundColor: 'rgba(10,25,41,255)', overflow: 'auto' }}>
         <div style={{ marginLeft: '-10px' }}>
           <img src={B2BPortalLogo} alt="B2B Portal Logo" style={{ width: "80px", verticalAlign: "middle" }} />
           {sidebarOpen && <h3 style={{ color: 'rgba(111,129,149,255)', display: 'inline', verticalAlign: "middle", marginLeft: '-10px' }}>B2B Portal</h3>}

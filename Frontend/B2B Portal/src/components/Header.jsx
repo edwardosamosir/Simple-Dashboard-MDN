@@ -2,8 +2,10 @@ import { Col, Container, Form, Row, InputGroup, Button } from "react-bootstrap";
 import { FaSearch, FaBell, FaStore } from 'react-icons/fa';
 import { PiCreditCardFill } from 'react-icons/pi';
 import profilePic from '../assets/dummyProfilePic.jpg';
+import UserProfileDropdown from "./UserProfileDropDown";
 
 export default function Header() {
+    const userEmail = localStorage.getItem('email')
     return (
         <div fluid >
             <Row style={{ backgroundColor: 'white', alignItems: 'center' }}>
@@ -29,15 +31,8 @@ export default function Header() {
                 </Col>
                 <Col sm={9} className="text-end">
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end' }}>
-                        <div style={{ marginRight: '10px', color: 'gray' }}>admin@admin.com</div>
-                        <div style={{
-                            width: '50px',
-                            height: '50px',
-                            borderRadius: '50%',
-                            backgroundColor: 'rgba(236,236,236,255)',
-                            backgroundImage: `url(${profilePic})`,
-                            backgroundSize: 'cover',
-                        }} />
+                        <div style={{ marginRight: '10px', color: 'gray' }}>{userEmail}</div>
+                        <UserProfileDropdown/>
                         <div style={{
                             width: '50px',
                             height: '50px',

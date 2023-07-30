@@ -12,10 +12,10 @@ export default function HomePage() {
         <Header />
         <DashboardCard />
         <Row className="justify-content-center" style={{ margin: '30px 0' }}>
-          <Col md={6}>
+          <Col md={7}>
             <ReceivableChart />
           </Col>
-          <Col md={6}>
+          <Col md={5}>
             <RevenueChart />
           </Col>
         </Row>

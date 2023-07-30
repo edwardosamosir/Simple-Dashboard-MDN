@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button, InputGroup } from 'react-bootstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from 'react-icons/md';
+import { Link, useNavigate } from "react-router-dom";
 import bannerImage from '../assets/B2BPortalBanner.png';
-import { Link } from "react-router-dom";
+import MyAlert from "../components/Alert";
+import { baseUrl } from "../config/api"
+
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,19 +15,121 @@ export default function RegisterPage() {
     setShowPassword((prevShowPassword) => !prevShowPassword);
   };
 
+  const navigate = useNavigate()
+
+  const [showAlert, setShowAlert] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [userData, setUserData] = useState({
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: ""
+  });
+
+  const changeHandler = (event) => {
+    const { name, value } = event.target;
+    setUserData((prevUserData) => ({
+      ...prevUserData,
+      [name]: name === "phone" ? combineCountryCodeAndPhone(value) : value,
+    }));
+  };
+
+  const combineCountryCodeAndPhone = (phoneValue) => {
+    const countryCode = userData.countryCode || "+62"; 
+    return countryCode + phoneValue;
+  };
+
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    if (!userData.email) {
+      setErrorMessage('Email cannot be empty!')
+      setShowAlert(true)
+      return
+    }
+    if (!userData.password) {
+      setErrorMessage('Password cannot be empty!')
+      setShowAlert(true)
+      return
+    }
+
+    if (!userData.phone) {
+      setErrorMessage('Phone number cannot be empty!')
+      setShowAlert(true)
+      return
+    }
+
+    if (userData.password.length < 5) {
+      setErrorMessage('Password length required minimum 5 characters long')
+      setShowAlert(true)
+      return
+    }
+
+    if (userData.password !== userData.confirmPassword) {
+      setErrorMessage('Passwords do not match!')
+      setShowAlert(true)
+      return;
+    }
+
+    const objToPass = (({ confirmPassword, ...rest }) => ({ ...rest, type: 2 }))(userData);
+
+    fetch(baseUrl + "/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.getItem('access_token')
+      },
+      body: JSON.stringify(objToPass),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        } else {
+          switch (response.status) {
+            case 400: throw new Error('This email is taken already!')
+            default: throw new Error('Internal server error.')
+          }
+        }
+      })
+      .then((data) => {
+        navigate('/')
+      })
+      .catch((error) => {
+        setErrorMessage(error?.message)
+        setShowAlert(true)
+        return
+      })
+      .finally(() => {
+        const afterSubmitObj = {
+          email: "",
+          phone: "",
+          password: "",
+          confirmPassword: ""
+        };
+        setUserData(afterSubmitObj);
+      })
+  };
+
   return (
     <Container fluid>
-      <Row>
-        <Col md={4}>
-          <div className="registration-form" style={{ maxWidth: '450px', margin: 'auto', marginTop: '50px' }}>
+      <Row className="align-items-center h-100">
+        <Col xs={12} md={4} style={{ marginTop: '50px' }}>
+          <div className="registration-form" style={{ maxWidth: '450px', margin: 'auto' }}>
             <h5 style={{ textAlign: 'center', fontWeight: 'bold' }}>Registration</h5>
             <br />
             <h4 style={{ color: '#5ebf4e' }}>User Info</h4>
             <br />
-            <Form >
+            {showAlert && <MyAlert title={errorMessage} setShow={setShowAlert} />}
+            <Form onSubmit={submitHandler}>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label style={{ fontWeight: 'bold' }}>Email Account</Form.Label>
-                <Form.Control type="email" placeholder="Enter email" />
+                <Form.Control
+                  name="email"
+                  type="email"
+                  placeholder="Enter email"
+                  onChange={changeHandler}
+                />
               </Form.Group>
               <br />
               <Form.Group controlId="formBasicMobile">
@@ -33,8 +138,16 @@ export default function RegisterPage() {
                   <div style={{ position: 'relative', display: 'inline-flex' }}>
                     <Form.Control
                       as="select"
-                      defaultValue="+62"
+                      value={userData.countryCode || "+62"}
                       style={{ maxWidth: '90px', minWidth: '80px', paddingRight: '25px' }}
+                      onChange={(event) => {
+                        const selectedCountryCode = event.target.value;
+                        setUserData((prevUserData) => ({
+                          ...prevUserData,
+                          countryCode: selectedCountryCode,
+                        }));
+                      }}
+              
                     >
                       <option>+1</option>
                       <option>+39</option>
@@ -66,8 +179,10 @@ export default function RegisterPage() {
                     />
                   </div>
                   <Form.Control
+                    name="phone"
                     type="text"
                     placeholder="Enter mobile number"
+                    onChange={changeHandler}
                   />
                 </InputGroup>
               </Form.Group>
@@ -76,11 +191,13 @@ export default function RegisterPage() {
                 <Form.Label style={{ fontWeight: 'bold' }}>Password</Form.Label>
                 <InputGroup>
                   <Form.Control
+                    name="password"
                     type={showPassword ? 'text' : 'password'}
                     placeholder="Enter password"
-                    style={{ borderRightColor: 'white'}}
+                    style={{ borderRightColor: 'white' }}
+                    onChange={changeHandler}
                   />
-                  <InputGroup.Text onClick={togglePasswordVisibility} style={{backgroundColor:'white'}}>
+                  <InputGroup.Text onClick={togglePasswordVisibility} style={{ backgroundColor: 'white' }}>
                     {showPassword ? <FaEyeSlash /> : <FaEye />}
                   </InputGroup.Text>
                 </InputGroup>
@@ -88,7 +205,12 @@ export default function RegisterPage() {
               <br />
               <Form.Group controlId="formBasicConfirmPassword">
                 <Form.Label style={{ fontWeight: 'bold' }}>Confirm Password</Form.Label>
-                <Form.Control type="password" placeholder="Re-enter password" />
+                <Form.Control
+                  name="confirmPassword"
+                  type="password"
+                  placeholder="Re-enter password"
+                  onChange={changeHandler}
+                />
               </Form.Group>
               <br />
               <br />
@@ -100,15 +222,13 @@ export default function RegisterPage() {
             </Form>
           </div>
         </Col>
-        <Col md={1} style={{ backgroundColor: '#32ae1e', height: '100vh' }}></Col>
-        <Col md={6} style={{
+        <Col md={1} className="d-none d-md-block" style={{ backgroundColor: '#32ae1e', height: '100vh' }}></Col>
+        <Col md={6} className="d-none d-md-block" style={{
           backgroundImage: `url(${bannerImage})`, backgroundSize: 'cover',
           backgroundPosition: 'center', backgroundRepeat: 'no-repeat', height: '100vh'
         }}></Col>
-        <Col md={1} style={{ backgroundColor: '#1e8d91', height: '100vh' }}></Col>
+        <Col md={1} className="d-none d-md-block" style={{ backgroundColor: '#1e8d91', height: '100vh' }}></Col>
       </Row>
     </Container>
-
   )
-
 }

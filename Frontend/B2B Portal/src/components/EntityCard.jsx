@@ -2,10 +2,11 @@ import { Card, Image } from "react-bootstrap";
 import downtrendChart from "../assets/downtrendChart.png";
 import uptrendChart from "../assets/uptrendChart.png";
 import { FaArrowUp, FaArrowDown } from 'react-icons/fa';
+import '../css/entityCard.css'; // import the CSS file
 
 export default function EntityCard() {
     return (
-        <Card style={{ margin: "10px 5px" }}>
+        <Card className="entity-card" style={{ margin: "10px 5px" }}>
             <Card.Body style={{ display: "flex", alignItems: "center" }}>
                 <div style={{ flex: 1 }}>
                     <Card.Title style={{ color: 'rgba(90, 92, 105, 255)', marginBottom: '0.5rem' }}>Vendor/Suppliers</Card.Title>
@@ -16,8 +17,8 @@ export default function EntityCard() {
                         <div style={{ color: 'gray' }}>Last Month</div>
                     </div>
                 </div>
-                <div style={{ flex: 1, display: 'flex', justifyContent: 'end', alignItems: 'center' }}>
-                    <Image src={uptrendChart} alt="Uptrend Chart" style={{ width: "55%" }} />
+                <div className="chart-container" style={{ flex: 1, display: 'flex', justifyContent: 'end', alignItems: 'center' }}>
+                    <Image className="chart-image" src={uptrendChart} alt="Uptrend Chart" />
                 </div>
             </Card.Body>
         </Card>

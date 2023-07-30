@@ -3,6 +3,7 @@ import { Card, Container, Row, Col } from "react-bootstrap";
 import EntityCard from "../components/EntityCard";
 import { PiArrowSquareUp } from 'react-icons/pi';
 import CustomButton from "./CustomButton";
+import "../css/dashboardCard.css"; // import the CSS file
 
 export default function DashboardCard() {
     return (
@@ -10,12 +11,12 @@ export default function DashboardCard() {
             <Row>
                 <Col>
                     <Card>
-                        <Card.Header style={{ backgroundColor: 'white', margin: '20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                            <div style={{ marginLeft: '-15px' }}>
+                        <Card.Header className="card-header" style={{ backgroundColor: 'white', margin: '20px' }}>
+                            <div className="card-header-left" style={{ marginLeft: '-15px' }}>
                                 <Card.Title>Dashboard</Card.Title>
                                 <Card.Text style={{ color: 'gray' }}>These companies have a dashboard</Card.Text>
                             </div>
-                            <button
+                            <button className="card-header-button"
                                 style={{
                                     display: 'flex',
                                     alignItems: 'center',
@@ -40,30 +41,30 @@ export default function DashboardCard() {
                         </Card.Body>
                         <Card.Body className="mb-3" >
                             <Row>
-                                <Col md={3}>
+                                <Col sm={6} md={3}>
                                     <EntityCard />
                                 </Col>
-                                <Col md={3}>
+                                <Col sm={6} md={3}>
                                     <EntityCard />
                                 </Col>
-                                <Col md={3}>
+                                <Col sm={6} md={3}>
                                     <EntityCard />
                                 </Col>
-                                <Col md={3}>
+                                <Col sm={6} md={3}>
                                     <EntityCard />
                                 </Col>
                             </Row>
                             <Row>
-                                <Col md={3}>
+                                <Col sm={6} md={3}>
                                     <EntityCard />
                                 </Col>
-                                <Col md={3}>
+                                <Col sm={6} md={3}>
                                     <EntityCard />
                                 </Col>
-                                <Col md={3}>
+                                <Col sm={6} md={3}>
                                     <EntityCard />
                                 </Col>
-                                <Col md={3}>
+                                <Col sm={6} md={3}>
                                     <EntityCard />
                                 </Col>
                             </Row>

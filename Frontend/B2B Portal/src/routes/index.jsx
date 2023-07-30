@@ -17,11 +17,11 @@ import CustomersCleaningPage from '../pages/CustomersCleaningPage'
 const router = createBrowserRouter([
     {
         element : <Layout />,
-        // loader : () => {
-        //     const token = localStorage.getItem('access_token')
-        //     if(!token) throw redirect ('/login')
-        //     return null
-        // },
+        loader : () => {
+            const token = localStorage.getItem('access_token')
+            if(!token) throw redirect ('/login')
+            return null
+        },
         children : [
             {
                 path : "/",

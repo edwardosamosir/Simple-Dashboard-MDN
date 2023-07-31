@@ -4,6 +4,7 @@ import DashboardCard from "../components/DashboardCard";
 import { Container, Row, Col } from "react-bootstrap";
 import RevenueChart from "../components/RevenueChart";
 import ReceivableChart from "../components/ReceivableChart";
+import '../css/chart.css'
 
 export default function HomePage() {
   return (
@@ -12,11 +13,15 @@ export default function HomePage() {
         <Header />
         <DashboardCard />
         <Row className="justify-content-center" style={{ margin: '30px 0' }}>
-          <Col md={7}>
-            <ReceivableChart />
+          <Col xs={12} md={7}>
+            <div className="chart-container">
+              <ReceivableChart />
+            </div>
           </Col>
-          <Col md={5}>
-            <RevenueChart />
+          <Col xs={12} md={5}>
+            <div className="chart-container">
+              <RevenueChart />
+            </div>
           </Col>
         </Row>
       </Container>

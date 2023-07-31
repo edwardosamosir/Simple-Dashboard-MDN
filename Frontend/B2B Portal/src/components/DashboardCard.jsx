@@ -1,13 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Container, Row, Col } from "react-bootstrap";
 import EntityCard from "../components/EntityCard";
 import { PiArrowSquareUp } from 'react-icons/pi';
 import CustomButton from "./CustomButton";
-import "../css/dashboardCard.css"; // import the CSS file
+import "../css/dashboardCard.css"; 
 
 export default function DashboardCard() {
+    const [entityData, setEntityData] = useState([
+        {
+          title: "Vendor/Suppliers",
+          value: "200.000",
+          percentage: -23
+        },
+        {
+            title: "Customer/Dealer",
+            value: "300.000",
+            percentage: 23 
+        },
+        {
+            title: "Products SKU",
+            value: "300",
+            percentage: 23 
+        },
+        {
+            title: "Purchase Order",
+            value: "21",
+            percentage: -23 
+        },
+        {
+            title: "Sales Order",
+            value: "64",
+            percentage: -23
+        },
+        {
+            title: "Grinds",
+            value: "1.666.664",
+            percentage: 23
+        },
+        {
+            title: "Manuals",
+            value: "64",
+            percentage: -23 
+        },
+        {
+            title: "Vert Transfers",
+            value: "2.001",
+            percentage: 23 
+        },
+      ]);
+
     return (
-        <Container className="mt-1 mb-1" fluid style={{ padding: '10px 30px' }}>
+        <Container className="mt-1 mb-1" style={{ padding: '10px 20px 10px 30px' }} fluid >
             <Row>
                 <Col>
                     <Card>
@@ -40,34 +83,17 @@ export default function DashboardCard() {
                             <CustomButton buttonText="2 Months" />
                         </Card.Body>
                         <Card.Body className="mb-3" >
-                            <Row>
-                                <Col sm={6} md={3}>
-                                    <EntityCard />
-                                </Col>
-                                <Col sm={6} md={3}>
-                                    <EntityCard />
-                                </Col>
-                                <Col sm={6} md={3}>
-                                    <EntityCard />
-                                </Col>
-                                <Col sm={6} md={3}>
-                                    <EntityCard />
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col sm={6} md={3}>
-                                    <EntityCard />
-                                </Col>
-                                <Col sm={6} md={3}>
-                                    <EntityCard />
-                                </Col>
-                                <Col sm={6} md={3}>
-                                    <EntityCard />
-                                </Col>
-                                <Col sm={6} md={3}>
-                                    <EntityCard />
-                                </Col>
-                            </Row>
+                        <Row>
+                        {entityData.map((data, index) => (
+                          <Col key={index} sm={6} md={3}>
+                            <EntityCard
+                              title={data.title}
+                              value={data.value}
+                              percentage={data.percentage}
+                            />
+                          </Col>
+                        ))}
+                      </Row>
                         </Card.Body>
                     </Card>
                 </Col>

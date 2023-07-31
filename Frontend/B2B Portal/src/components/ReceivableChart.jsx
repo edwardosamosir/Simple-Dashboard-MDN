@@ -74,7 +74,7 @@ class ReceivableChart extends Component {
 		};
 
 		return (
-			<div style={{width: '110%', maxWidth: '900px', marginLeft:'2%', border:'1px solid rgba(210,210,210,255)', borderRadius: '4px', padding:'2% 1%', backgroundColor: 'white' }}>
+			<div style={{width: '100%', maxWidth: '1020px', marginLeft:'2%', border:'1px solid rgba(210,210,210,255)', borderRadius: '4px', padding:'2% 4%', backgroundColor: 'white' }}>
 				<CanvasJSChart options={options} onRef={ref => (this.chart = ref)} />
 			</div>
 		);

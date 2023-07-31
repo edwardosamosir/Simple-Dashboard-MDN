@@ -28,7 +28,7 @@ class RevenueChart extends Component {
 			}]
 		}
 		return (
-			<div style={{width: '100%', maxWidth: '620px', marginLeft:'1%', border:'1px solid rgba(210,210,210,255)', borderRadius:'4px', padding:'2% 1%', backgroundColor: 'white'}}>
+			<div style={{width: '100%', maxWidth: '620px', marginLeft:'1%', marginRight: '1%', border:'1px solid rgba(210,210,210,255)', borderRadius:'4px', padding:'2.7% 4% 2.7% 4%', backgroundColor: 'white'}}>
 				<CanvasJSChart options={options} />
 			</div>
 		);

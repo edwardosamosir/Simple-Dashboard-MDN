@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
 import { Container, Row, Col, Form, Button, InputGroup, Spinner } from 'react-bootstrap';
 import { FaEye, FaEyeSlash, FaKey, FaUser } from 'react-icons/fa';
 import { Link, useNavigate } from "react-router-dom";
@@ -8,16 +9,36 @@ import B2BPortalLogo from '../assets/B2BPortalLogoNoBG.png';
 import MyAlert from "../components/Alert";
 
 export default function LoginPage() {
-
-    const [remember, setRemember] = useState(false);
-    const handleRememberChange = (event) => setRemember(event.target.checked);
-
     const navigate = useNavigate();
     const [showAlert, setShowAlert] = useState(false);
     const [loading, setLoading] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [remember, setRemember] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+
+    useEffect(() => {
+        const rememberPreference = Cookies.get("remember");
+        if (rememberPreference === "true") {
+            setRemember(true);
+            const storedEmail = Cookies.get("email") || "";
+            setEmail(storedEmail);
+            const storedPassword = Cookies.get("password") || "";
+            setPassword(storedPassword);
+        }
+    }, []);
+
+    const handleRememberChange = (event) => {
+        const { checked } = event.target;
+        setRemember(checked);
+
+        Cookies.set("remember", checked.toString());
+
+        if (!checked) {
+            Cookies.remove("email");
+            Cookies.remove("password");
+        }
+    };
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -31,6 +52,7 @@ export default function LoginPage() {
         if (!password) {
             setErrorMessage("Password is required!");
             setShowAlert(true);
+            return;
         }
 
         const obj = {
@@ -70,8 +92,16 @@ export default function LoginPage() {
                 setShowAlert(true);
                 return;
             })
-            .finally((_) => {
+            .finally(() => {
                 setLoading(false);
+
+                if (remember) {
+                    Cookies.set("email", email);
+                    Cookies.set("password", password);
+                } else {
+                    Cookies.remove("email");
+                    Cookies.remove("password");
+                }
             });
     };
 
@@ -107,6 +137,7 @@ export default function LoginPage() {
                                                 type="email"
                                                 placeholder="Enter email"
                                                 style={{ borderLeftColor: 'white' }}
+                                                value={email}
                                                 onChange={(e) => setEmail(e.target.value)}
                                             />
                                         </InputGroup>
@@ -122,6 +153,7 @@ export default function LoginPage() {
                                                 type={showPassword ? 'text' : 'password'}
                                                 placeholder="Enter password"
                                                 style={{ borderLeftColor: 'white', borderRightColor: 'white' }}
+                                                value={password}
                                                 onChange={(e) => setPassword(e.target.value)}
                                             />
                                             <InputGroup.Text onClick={togglePasswordVisibility} style={{ backgroundColor: 'white' }}>

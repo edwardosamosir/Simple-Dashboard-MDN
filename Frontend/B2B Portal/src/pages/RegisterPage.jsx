@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Button, InputGroup } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, InputGroup, Spinner } from 'react-bootstrap';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { Link, useNavigate } from "react-router-dom";
@@ -16,7 +16,7 @@ export default function RegisterPage() {
   };
 
   const navigate = useNavigate()
-
+  const [loading, setLoading] = useState(false);
   const [showAlert, setShowAlert] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [userData, setUserData] = useState({
@@ -74,6 +74,8 @@ export default function RegisterPage() {
 
     const objToPass = (({ confirmPassword, ...rest }) => ({ ...rest, type: 2 }))(userData);
 
+    setLoading(true);
+
     fetch(baseUrl + "/register", {
       method: "POST",
       headers: {
@@ -108,6 +110,7 @@ export default function RegisterPage() {
           confirmPassword: ""
         };
         setUserData(afterSubmitObj);
+        setLoading(false);
       })
   };
 
@@ -215,7 +218,27 @@ export default function RegisterPage() {
               <br />
               <br />
               <br />
-              <Button type="submit" style={{ width: '100%', backgroundColor: 'rgba(18,183,106,255)', borderColor: 'rgba(18,183,106,255)', marginBottom: '15px', fontWeight: 'bold' }}>Continue</Button>
+              <Button type="submit"
+              style={{
+                  width: '100%',
+                  backgroundColor: 'rgba(18,183,106,255)', borderColor: 'rgba(18,183,106,255)',
+                  marginBottom: '15px',
+                  fontWeight: 'bold'
+              }}> {loading && <>
+                  <Spinner
+                      as="span"
+                      animation="border"
+                      size="sm"
+                      role="status"
+                      aria-hidden="true"
+                  />
+                  <span className="visually-hidden">Loading...</span>
+                  &nbsp;
+              </>
+              }
+              {!loading && <span>Continue</span>}
+              {loading && <span>Loading ...</span>}
+          </Button>
               <Link to={'/login'}>
                 <Button type="button" style={{ width: '100%', color: 'rgba(18,183,106,255)', backgroundColor: 'white', borderColor: 'rgba(18,183,106,255)', fontWeight: 'bold', marginBottom: '25px' }}>Back</Button>
               </Link>

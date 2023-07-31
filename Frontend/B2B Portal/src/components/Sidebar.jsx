@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Nav, NavDropdown } from 'react-bootstrap';
 import { FaHome, FaStore } from 'react-icons/fa';
 import { MdKeyboardArrowDown, MdKeyboardDoubleArrowLeft, MdKeyboardDoubleArrowRight, MdPeople } from 'react-icons/md';

@@ -1,0 +1,75 @@
+/* Footer.css */
+
+.footer-container {
+    font-family: "Poppins";
+    padding: 10px;
+    background-color: rgba(250, 250, 251, 255)  !important;
+    border-top: 1px solid #e5e5e5;
+}
+
+.nav-item {
+    text-align: center;
+}
+
+.nav-link {
+    padding: 2px;
+}
+
+.footer-copyright {
+    font-size: 14px;
+    text-align: center;
+}
+
+@media screen and (min-width: 280px) {
+    .footer-container {
+        padding: 15px;
+    }
+    
+    .nav-link {
+        font-size: 13px !important; 
+    }
+
+    .footer-copyright {
+        font-size: 12px;
+        text-align: center;
+    }
+}
+
+@media screen and (min-width: 576px) {
+    .footer-container {
+        padding: 20px;
+    }
+    
+    .nav-link {
+        font-size: 13px !important;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .footer-container {
+        padding: 25px ;
+    }
+
+    .nav-link {
+        font-size: 14px !important;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .nav-item {
+        text-align: left;
+    }
+    
+    .nav-link {
+        font-size: 14px !important;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .footer-container {
+        padding: 18px;
+    }
+    .nav-link {
+        font-size: 15px !important;
+    }
+}

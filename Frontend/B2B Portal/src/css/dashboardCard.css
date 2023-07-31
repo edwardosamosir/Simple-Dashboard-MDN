@@ -1,0 +1,22 @@
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-header-left {
+    flex: 1;
+}
+
+.card-header-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+@media (min-width: 576px) {
+    .card-header-button {
+        justify-content: flex-end;
+    }
+}
